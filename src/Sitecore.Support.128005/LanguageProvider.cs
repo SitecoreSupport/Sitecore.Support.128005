@@ -1,4 +1,4 @@
-﻿namespace Sitecore.Data.Managers
+﻿namespace Sitecore.Support.Data.Managers
 {
   using Microsoft.Extensions.DependencyInjection;
   using Sitecore;
@@ -33,7 +33,7 @@
     protected static readonly string[] WellKnownIllegalLanguageNames = new string[] { "-", "default", "__language" };
 
     [Obsolete("Use constructor overload with all dependencies.")]
-    public LanguageProvider() : this(ServiceProviderServiceExtensions.GetRequiredService<BaseCacheManager>(DependencyInjection.ServiceLocator.ServiceProvider), ServiceProviderServiceExtensions.GetRequiredService<BaseSettings>(ServiceLocator.ServiceProvider))
+    public LanguageProvider() : this(ServiceProviderServiceExtensions.GetRequiredService<BaseCacheManager>(ServiceLocator.ServiceProvider), ServiceProviderServiceExtensions.GetRequiredService<BaseSettings>(ServiceLocator.ServiceProvider))
     {
     }
 
@@ -151,7 +151,8 @@
       string cultureName = strArray[0].Trim();
       CultureAndRegionInfoBuilder builder = new CultureAndRegionInfoBuilder(languageName, CultureAndRegionModifiers.None);
       CultureInfo cultureInfo = Language.GetCultureInfo(cultureName);
-      if (cultureInfo.NativeName.ToLowerInvariant().Contains("unknown language"))
+      //The fix: use EnglishName instead of NativeName
+      if (cultureInfo.EnglishName.ToLowerInvariant().Contains("unknown language"))
       {
         return null;
       }
@@ -438,5 +439,7 @@
         return this._registeredLanguages;
       }
     }
+
+
   }
 }

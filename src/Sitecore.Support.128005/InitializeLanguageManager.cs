@@ -1,4 +1,4 @@
-﻿namespace Sitecore.Pipelines.InitializeManagers
+﻿namespace Sitecore.Support.Pipelines.InitializeManagers
 {
   using Sitecore;
   using Sitecore.Data.Managers;
@@ -11,7 +11,7 @@
     [UsedImplicitly]
     public void Process(PipelineArgs args)
     {
-      LanguageManager.Initialize();
+      Sitecore.Support.Data.Managers.LanguageManager.Initialize();
     }
   }
 }

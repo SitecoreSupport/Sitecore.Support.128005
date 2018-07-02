@@ -1,4 +1,4 @@
-﻿namespace Sitecore.Data.Managers
+﻿namespace Sitecore.Support.Data.Managers
 {
   using Sitecore.Abstractions;
   using Sitecore.Collections;
@@ -11,7 +11,7 @@
   public sealed class LanguageManager
   {
     private static readonly LazyResetable<BaseLanguageManager> Instance = ServiceLocator.GetRequiredResetableService<BaseLanguageManager>();
-    private static readonly LazyResetable<Sitecore.Data.Managers.LanguageProvider> LanguageProvider = ServiceLocator.GetRequiredResetableService<Sitecore.Data.Managers.LanguageProvider>();
+    private static readonly LazyResetable<Sitecore.Support.Data.Managers.LanguageProvider> LanguageProvider = ServiceLocator.GetRequiredResetableService<Sitecore.Support.Data.Managers.LanguageProvider>();
 
     public static Language GetLanguage(string name) =>
         Instance.Value.GetLanguage(name);
